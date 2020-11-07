@@ -89,18 +89,17 @@
 					   .transition()
 					   .delay(1000)					// <-- A static, 1s delay before transition begins
 					   .duration(2000)
-          			   .attr("x", function(d) {
-                           return xScale(i);
-          			   })
-         			   .attr("y", function(d, i) {
-                          return h - yScale(d.value);
-         			   })
-			           .attr("height", function(d){
-                          return yScale(d.value);
-			           })
-					   .attr("width", function(d) {
-                           //TODO
-					   })
+						 .attr("x", function(d) {
+									return 0;
+						})
+						 .attr("y", function(d, i) {
+									return xScale(i);
+						})
+						 .attr("height", xScale.bandwidth())
+
+						 .attr("width", function(d) {
+									return yScale(d);
+						})
 
 					//Update all labels
 					svg.selectAll("text")
@@ -111,12 +110,12 @@
 					   .text(function(d) {
 					   		return d;
 					   })
-					   .attr("x", function(d, i) {
-                    return i * (w / dataset.length);
-					   })
-					   .attr("y", function(d,i) {
-                    //return h - (d * 4);
-                    return 0;
+						 .attr("text-anchor", "middle")
+						 .attr("x", function(d) {
+								return 10;
+						 })
+					 	 .attr("y", function(d, i) {
+								return xScale(i) + xScale.bandwidth() / 2;
 					   });
 
 				});
